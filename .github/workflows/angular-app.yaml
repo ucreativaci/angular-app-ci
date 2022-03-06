@@ -10,5 +10,42 @@ jobs:
 
   verify_files:
     runs-on: windows-machine
+    needs: checkout_code
     steps:
       - run: dir
+
+  verify_ng_version:
+    runs-on: windows-machine
+    needs: verify_files
+    steps:
+      - run: gn version
+
+  execute_npm_install:
+    runs-on: windows-machine
+    needs: verify_ng_version
+    steps:
+      - run: npm install
+
+  lint_test:
+    runs-on: windows-machine
+    needs: execute_npm_install
+    steps:
+      - run: ng lint
+
+  unit_test:
+    runs-on: windows-machine
+    needs: lint_test
+    steps:
+      - run: ng test
+
+  compilation:
+    runs-on: windows-machine
+    needs: unit_test
+    steps:
+      - run: ng test
+
+  deployment:
+    runs-on: windows-machine
+    needs: compilation
+    steps:
+      - run: xcopy dist\clase6 C:\inetpub\wwwroot\romell\dev /s /y /q
