@@ -1,0 +1,15 @@
+name: angular-app-wk
+
+on: [push]
+
+jobs:
+  checkout_code:
+    runs-on: windows-machine
+    steps:
+      - uses: actions/checkout@v2
+
+  verify_files:
+    runs-on: windows-machine
+    needs: checkout_code
+    steps:
+      - run: dir
