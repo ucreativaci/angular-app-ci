@@ -10,6 +10,5 @@ jobs:
 
   verify_files:
     runs-on: windows-machine
-    needs: checkout_code
     steps:
       - run: dir
