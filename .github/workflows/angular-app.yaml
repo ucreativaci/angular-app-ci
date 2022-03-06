@@ -42,7 +42,7 @@ jobs:
     runs-on: windows-machine
     needs: unit_test
     steps:
-      - run: ng test
+      - run: ng build
 
   deployment:
     runs-on: windows-machine
